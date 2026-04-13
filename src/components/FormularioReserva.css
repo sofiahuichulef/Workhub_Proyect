@@ -1,0 +1,227 @@
+/* ================================================
+   FormularioReserva.css
+   Estilo del modal de reserva — tema claro WorkHub
+   Fuentes y variables heredadas de index.css
+   ================================================ */
+
+/* ── Overlay de fondo ────────────────────────── */
+.reserva-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 1rem;
+  backdrop-filter: blur(2px);
+  animation: overlayIn 0.2s ease;
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Caja del modal ──────────────────────────── */
+.reserva-modal {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  animation: modalIn 0.25s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Encabezado del modal ────────────────────── */
+.reserva-header {
+  margin-bottom: 1.5rem;
+}
+
+.reserva-titulo {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1E293B;
+  margin-bottom: 0.25rem;
+}
+
+.reserva-subtitulo {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  color: #64748B;
+}
+
+.reserva-subtitulo strong {
+  color: #1D76E2;
+  font-weight: 700;
+}
+
+/* ── Grupos de campo ─────────────────────────── */
+.reserva-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.reserva-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #334155;
+}
+
+/* ── Inputs ──────────────────────────────────── */
+.reserva-input {
+  width: 100%;
+  padding: 12px 14px;
+  background-color: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #1E293B;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reserva-input::placeholder {
+  color: #94A3B8;
+  font-weight: 400;
+}
+
+.reserva-input:focus {
+  border-color: #1D76E2;
+  box-shadow: 0 0 0 3px rgba(29, 118, 226, 0.12);
+  background-color: #ffffff;
+}
+
+/* Input con error */
+.reserva-input.input-error {
+  border-color: #ef4444;
+  background-color: #fff5f5;
+}
+
+.reserva-input.input-error:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+
+/* ── Mensaje de error por campo ──────────────── */
+.reserva-campo-error {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.76rem;
+  color: #ef4444;
+  margin-top: 0.1rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ── Fila de dos columnas (hora inicio / fin) ── */
+.reserva-fila {
+  display: flex;
+  gap: 0.85rem;
+}
+
+.reserva-fila .reserva-form-group {
+  flex: 1;
+}
+
+/* ── Botones de acción ───────────────────────── */
+.reserva-acciones {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.reserva-btn-cancelar {
+  flex: 1;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid #CBD5E1;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #64748B;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.reserva-btn-cancelar:hover {
+  background: #F1F5F9;
+  border-color: #94A3B8;
+}
+
+.reserva-btn-confirmar {
+  flex: 1;
+  padding: 12px;
+  background: #1D76E2;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 3px 20px rgba(29, 118, 226, 0.35);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.reserva-btn-confirmar:hover {
+  background: #1558b0;
+  transform: translateY(-1px);
+}
+
+.reserva-btn-confirmar:active {
+  transform: translateY(0);
+}
+
+.reserva-btn-confirmar:disabled {
+  background: #94A3B8;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Spinner dentro del botón ────────────────── */
+.reserva-btn-confirmar .spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Responsive mobile ───────────────────────── */
+@media (max-width: 520px) {
+  .reserva-modal {
+    padding: 1.5rem;
+    border-radius: 16px;
+    max-width: 100%;
+  }
+
+  .reserva-fila {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .reserva-acciones {
+    flex-direction: column;
+  }
+}
