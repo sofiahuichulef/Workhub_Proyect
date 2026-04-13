@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+:root {
+  --color-dark: #0F172A;
+  --color-primary: #1D76E2;
+  --color-white: #FFFFFF;
+  --color-gray-1: #64748B;
+  --color-gray-2: #94A3B8;
+  --color-gray-3: #475569;
+  --color-bg-soft: #E2E8F0;
+  --color-bg-light: #F1F5F9;
+  --color-bg-card: #F8FAFC;
+  --color-blue-soft: #DBEAFE;
+  --color-blue-light: #EFF6FF;
+  --color-border: #CBD5E1;
+  --white-90: rgba(255,255,255,0.9);
+  --white-50: rgba(255,255,255,0.5);
+  --white-10: rgba(255,255,255,0.1);
+  --white-02: rgba(255,255,255,0.02);
+  --blue-20: rgba(29,118,226,0.2);
+}
+
+body {
+  background: var(--color-bg-card);
+  display: flex;
+  flex-direction: column;
+}
