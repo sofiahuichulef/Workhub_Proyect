@@ -11,7 +11,7 @@ export default function Navbar() {
       <nav className="navbar">
         <div className="container-fluid navbar-inner">
           <Link to="/" className="title">
-            <img className="logo" src="/Logo.png" alt="Logo WorkHub Coworking" />
+            <img className="logo" src="/logo.jpg" alt="Logo WorkHub Coworking" />
             <h2 className="title-text">CoWork</h2>
           </Link>
 
