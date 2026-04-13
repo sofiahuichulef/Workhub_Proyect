@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.navbar{
+  background-color: var(--color-white);
+  padding: 0%;
+}
+
+.logo {
+  width: 3rem;
+}
+
+.title-text{
+  font-family: "Plus Jakarta Sans", sans-serif;
+  color: var(--color-dark);
+}
+
+.btn-login{
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.875rem;
+  padding: 8px 16px;
+  box-shadow: 0 3px 20px rgba(29, 118, 226, 0.35);
+}
+
