@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="footer-grid">
           <div className="footer-brand">
             <div className="footer-logo">
-              <img src="/Logo.png" alt="CoWork Logo" />
+              <img src="/logo.jpg" alt="CoWork Logo" />
               <h2>CoWork</h2>
             </div>
             <p className="description-text">
