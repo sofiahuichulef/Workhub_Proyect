@@ -1,26 +1,19 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Spaces from './pages/Spaces';
+import './styles/global.css';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import HomePage     from './views/HomePage'
-import LoginPage    from './views/LoginPage'
-import RegisterPage from './views/RegisterPage'
-import EspaciosPage from './views/EspaciosPage'
-import ReservasPage from './views/ReservasPage'
-import './App.css'
-
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/"         element={<HomePage />}     />
-        <Route path="/login"    element={<LoginPage />}    />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/espacios" element={<EspaciosPage />} />
-        <Route path="/reservas" element={<ReservasPage />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/spaces" element={<Spaces />} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
-
-export default App
