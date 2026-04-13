@@ -1,71 +1,117 @@
 .footer-custom {
-    background-color: var(--color-white);
-     border-top: 1px solid #f0e2e2; /*aca puedes poner un borde con bootstrap */
+  background-color: var(--color-white);
+  border-top: 1px solid #ece8e8;
+  padding-top: 40px;
 }
 
-/* Alineación de Logo */
-.logo-img {
-    height: 40px;
-    width: 40px;
-    object-fit: contain;
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-/* Texto Justificado */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 20px;
+  margin-bottom: 28px;
+}
+
+.footer-brand {
+  grid-column: 1 / -1;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.footer-logo img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.footer-logo h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-dark);
+  margin: 0;
+}
+
 .description-text {
-    color: var(--color-gray-3);
-    max-width: 280px;        /* Evita que el texto sea una sola línea larga */
-    margin: 0 auto;          /* Centra el contenedor entero */
-    line-height: 1.6;        /* Da espacio entre líneas */
-    font-size: 14px;
+  color: var(--color-gray-3);
+  max-width: 280px;
+  line-height: 1.6;
+  font-size: 13px;
+  margin-bottom: 16px;
 }
 
-/* Títulos de las columnas */
-.title-link {
-    font-size: 1rem;
-    color: var(--color-dark);
+.social-links {
+  display: flex;
+  gap: 12px;
 }
 
-/* Reset de Listas para Alineación Perfecta */
-.custom-list {
-    margin: 0;
-    padding: 0;
-}
-
-.custom-list li {
-    font-size: 14px;
-    color: var(--color-gray-1);
-    margin-bottom: 0.75rem;
-    cursor: pointer;
-    transition: color 0.2s;
-}
-
-.custom-list li:hover {
-    color: #3182ce;
-}
-
-/* Iconos Sociales */
 .social-link {
-    color: var(--color-gray-2);
-    font-size: 1.2rem;
-    text-decoration: none;
-    transition: color 0.2s;
-
-    display:flex;
-align-items:center;
-font-size:1.2rem;
+  color: var(--color-gray-2);
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: color 0.2s, transform 0.2s;
 }
 
-.bi-at{
-font-size: 1.6rem;
+.social-link:hover { color: var(--color-gray-3); transform: scale(1.2); }
+
+.footer-col h5 {
+  font-size: 0.9rem;
+  color: var(--color-dark);
+  font-weight: 700;
+  margin-bottom: 14px;
 }
 
-.social-link:hover {
-    color: var(--color-gray-3);
-    transform: scale(1.2);
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-/* Copyright */
+.footer-col ul li {
+  font-size: 13px;
+  color: var(--color-gray-1);
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.footer-col ul li:hover { color: #3182ce; }
+
+.footer-col--desktop { display: none; }
+
+hr {
+  opacity: 0.2;
+  margin: 4px 0 14px;
+}
+
 .copyright-text {
-    font-size: 12px;
-    color: var(--color-gray-1);
+  font-size: 12px;
+  color: var(--color-gray-1);
+  text-align: center;
+  padding-bottom: 28px;
+}
+
+/* ===== TABLET (600px+) ===== */
+@media (min-width: 600px) {
+  .footer-grid { grid-template-columns: repeat(3, 1fr); }
+  .footer-brand { grid-column: 1 / -1; }
+}
+
+/* ===== DESKTOP (992px+) ===== */
+@media (min-width: 992px) {
+  .footer-container { padding: 0 32px; }
+  .footer-grid { grid-template-columns: repeat(4, 1fr); gap: 32px; }
+  .footer-brand { grid-column: auto; }
+  .footer-col--desktop { display: block; }
+  .footer-logo img { width: 45px; height: 45px; }
+  .footer-logo h2 { font-size: 1.25rem; }
 }
