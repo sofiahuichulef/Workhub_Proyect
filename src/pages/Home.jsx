@@ -32,6 +32,7 @@ const spaceCards = [
 
 export default function Home() {
   const [current, setCurrent] = useState(0);
+  const [spaceIndex, setSpaceIndex] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => setCurrent(c => (c + 1) % slides.length), 6000);
@@ -40,6 +41,9 @@ export default function Home() {
 
   const prev = () => setCurrent(c => (c - 1 + slides.length) % slides.length);
   const next = () => setCurrent(c => (c + 1) % slides.length);
+
+  const spacePrev = () => setSpaceIndex(c => (c - 1 + spaceCards.length) % spaceCards.length);
+  const spaceNext = () => setSpaceIndex(c => (c + 1) % spaceCards.length);
 
   return (
     <>
@@ -112,14 +116,53 @@ export default function Home() {
       {/* OUR SPACES */}
       <section className="spaces">
         <div className="spaces-container">
+          {/* Header: título + subtítulo a la izq, link a la der */}
           <div className="spaces-header">
-            <div>
-              <h2>Our Spaces</h2>
+            <div className="spaces-title-group">
+              <div className="spaces-title-row">
+                <h2>Our Spaces</h2>
+                <Link to="/spaces" className="view-link">View all spaces ›</Link>
+              </div>
               <p>Choose the environment that fits your workflow.</p>
             </div>
-            <Link to="/spaces" className="view-link">View all spaces ›</Link>
           </div>
-          <div className="spaces-grid">
+
+          {/* Carrusel móvil */}
+          <div className="spaces-carousel">
+            <div
+              className="spaces-track"
+              style={{ transform: `translateX(-${spaceIndex * 100}%)` }}
+            >
+              {spaceCards.map((card, i) => (
+                <div key={i} className="space-card">
+                  <img src={card.img} alt={card.title} />
+                  <div className="card-info">
+                    <h3>{card.title}</h3>
+                    <p>{card.price}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Flechas */}
+            <button className="space-arrow space-arrow--prev" onClick={spacePrev} aria-label="Anterior">&#8592;</button>
+            <button className="space-arrow space-arrow--next" onClick={spaceNext} aria-label="Siguiente">&#8594;</button>
+
+            {/* Dots */}
+            <div className="space-dots">
+              {spaceCards.map((_, i) => (
+                <button
+                  key={i}
+                  className={`space-dot ${i === spaceIndex ? 'space-dot--active' : ''}`}
+                  onClick={() => setSpaceIndex(i)}
+                  aria-label={`Slide ${i + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Grid desktop (se muestra con CSS) */}
+          <div className="spaces-grid-desktop">
             {spaceCards.map((card, i) => (
               <div key={i} className="space-card">
                 <img src={card.img} alt={card.title} />
