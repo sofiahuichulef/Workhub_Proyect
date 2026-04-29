@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import './Spaces.css';
 
@@ -56,6 +57,7 @@ const filters = [
 ];
 
 export default function Spaces() {
+  const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState('all');
   const [favorites, setFavorites] = useState([]);
   const [reserved, setReserved] = useState([]);
@@ -200,7 +202,7 @@ export default function Spaces() {
                   </ul>
                   <button
                     className={`reserve-btn ${reserved.includes(space.id) ? 'reserve-btn--done' : ''}`}
-                    onClick={() => reserve(space.id)}
+                    onClick={() => navigate(`/reserva/${space.id}`)}
                     disabled={reserved.includes(space.id)}
                   >
                     {reserved.includes(space.id) ? '✓ ¡Reservado!' : 'Reservar espacio'}
