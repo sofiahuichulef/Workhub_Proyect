@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Spaces from './pages/Spaces';
+import Reserva from './pages/Reserva';
 import './styles/global.css';
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/spaces" element={<Spaces />} />
+        <Route path="/reserva/:espacioId" element={<Reserva />} />
       </Routes>
     </BrowserRouter>
   );
