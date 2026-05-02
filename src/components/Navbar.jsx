@@ -30,7 +30,7 @@ export default function Navbar() {
             <ul className="nav-links">
               <li><Link className="nav-link" to="/spaces" onClick={() => setOpen(false)}>Spaces</Link></li>
               <li><Link className="nav-link" to="/#amenities" onClick={() => setOpen(false)}>Amenities</Link></li>
-              <li><Link className="nav-link" to="/#pricing" onClick={() => setOpen(false)}>Pricing</Link></li>
+              <li><Link className="nav-link" to="/pricing" onClick={() => setOpen(false)}>Pricing</Link></li>
               <li><Link className="nav-link" to="/#about" onClick={() => setOpen(false)}>About</Link></li>
             </ul>
             <Link to="/login" className="btn-login desktop-only">Login</Link>

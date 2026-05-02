@@ -99,6 +99,10 @@ hr {
   text-align: center;
   padding-bottom: 28px;
 }
+.footer-col a {
+  color: inherit;
+  text-decoration: none;
+}
 
 /* ===== TABLET (600px+) ===== */
 @media (min-width: 600px) {
