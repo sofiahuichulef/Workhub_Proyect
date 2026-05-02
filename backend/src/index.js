@@ -3,6 +3,9 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import espaciosRouter from './routes/espacios.routes.js';
 import reservasRoutes from './routes/reservas.routes.js';
+import errorHandler from './middlewares/errorHandler.js';
+import notFound from './middlewares/notFound.js';
+import validateReserva from './middlewares/validateReserva.js';
 
 dotenv.config();
 
@@ -19,11 +22,9 @@ app.get('/ping', (req, res) => {
 
 app.use('/espacios', espaciosRouter);
 
-// Middleware global de manejo de errores
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: 'Error interno del servidor' });
-});
+app.use(notFound);
+app.use(errorHandler);
+app.use(validateReserva);
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
