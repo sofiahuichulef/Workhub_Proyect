@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 });
 
 
-router.post('/', crearReserva);
+router.post('/:id', crearReserva);
 
 router.delete('/:id', eliminarReserva);
 router.put('/:id', validateReserva, actualizarReserva);
