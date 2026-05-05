@@ -7,20 +7,20 @@ const slides = [
   {
     bg: '/coworking.jpg',
     title: 'Work Hub Coworking',
-    subtitle: 'Donde las ideas se conectan y los proyectos cobran vida.',
-    btn: 'Reservar ahora',
+    subtitle: 'Where ideas connect and projects come to life.',
+    btn: 'Book now',
   },
   {
     bg: '/coworking2.jpg',
-    title: 'Espacios diseñados para crear',
-    subtitle: 'Conecta con profesionales y aumenta tu productividad.',
-    btn: 'Explorar',
+    title: 'Spaces designed for creation',
+    subtitle: 'Connect with professionals and boost your productivity.',
+    btn: 'Explore',
   },
   {
     bg: '/coworking3.jpg',
-    title: 'Trabaja en comunidad',
-    subtitle: 'Conecta con profesionales y aumenta tu productividad.',
-    btn: 'Unirse',
+    title: 'Work in community',
+    subtitle: 'Connect with professionals and boost your productivity.',
+    btn: 'Join',
   },
 ];
 
@@ -114,8 +114,8 @@ export default function Home() {
         <div className="spaces-container">
           <div className="spaces-header">
             <div>
-              <h2>Our Spaces</h2>
-              <p>Choose the environment that fits your workflow.</p>
+              <h2 className="title-text animate__animated animate__bounceInLeft">Our Spaces</h2>
+              <p className="title-text animate__animated animate__bounceInLeft"> Choose the environment that fits your workflow.</p>
             </div>
             <Link to="/spaces" className="view-link">View all spaces ›</Link>
           </div>

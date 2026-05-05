@@ -7,61 +7,61 @@ const TERMS_SECTIONS = [
   {
     id: 1,
     icon: "📋",
-    title: "1. Definiciones",
+    title: "1. Definitions",
     content:
-      "En este documento se establecen las definiciones esenciales sobre términos familiares, proveedores y servicios utilizados en nuestra plataforma.",
+      "This document explains the core terms, providers, and services used in our platform.",
   },
   {
     id: 2,
     icon: "🏢",
-    title: "2. Uso de Espacios",
+    title: "2. Space Use",
     content:
-      "Al hacer uso de nuestros espacios, el usuario acepta las condiciones establecidas, incluyendo normas de convivencia y cancelaciones de reservas.",
+      "By using our spaces, the user agrees to the established rules, including community guidelines and reservation policies.",
   },
   {
     id: 3,
     icon: "💳",
-    title: "3. Membresías y Pagos",
+    title: "3. Membership & Payments",
     content:
-      "Los planes de membresía se facturan mensualmente. Los pagos son procesados de forma segura a través de nuestras plataformas certificadas.",
+      "Membership plans are billed monthly. Payments are securely processed through our certified partners.",
   },
   {
     id: 4,
     icon: "⚖️",
-    title: "4. Responsabilidades",
+    title: "4. Responsibilities",
     content:
-      "El usuario asume plena responsabilidad por el uso adecuado de los espacios y el cumplimiento de las normas establecidas por CoWork.",
+      "The user assumes full responsibility for proper space use and compliance with CoWork policies.",
   },
   {
     id: 5,
     icon: "❌",
-    title: "5. Cancelaciones",
+    title: "5. Cancellations",
     content:
-      "Las cancelaciones realizadas con más de 24 horas de anticipación son elegibles para reembolso. Las cancelaciones tardías no aplican para devoluciones.",
+      "Cancellations made more than 24 hours in advance are eligible for refunds. Late cancellations are not refundable.",
   },
 ];
 
 const PRIVACY_BULLETS = [
-  "Política de información y datos almacenados",
-  "Privacidad de datos personales",
-  "Prohibición de compartir información con terceros",
-  "Cookies y rastreo de navegación",
-  "Derechos del usuario sobre sus datos",
+  "Data collection and storage policies",
+  "Personal information privacy",
+  "No sharing of data with third parties without consent",
+  "Cookies and browsing tracking",
+  "User rights over personal data",
 ];
 
 const FAQ = [
-  "¿Cómo reservar un espacio?",
-  "¿Cómo cambiar mi plan?",
-  "¿Cómo cancelar mi membresía?",
-  "¿Cómo obtener factura?",
-  "¿Puedo traer invitados?",
+  "How do I book a space?",
+  "How can I change my plan?",
+  "How do I cancel my membership?",
+  "How can I get an invoice?",
+  "Can I bring guests?",
 ];
 
 const TABS = [
-  { id: "terms", label: "Términos y Condiciones" },
-  { id: "privacy", label: "Política de Privacidad" },
-  { id: "help", label: "Centro de Ayuda" },
-  { id: "contact", label: "Contáctanos" },
+  { id: "terms", label: "Terms & Conditions" },
+  { id: "privacy", label: "Privacy Policy" },
+  { id: "help", label: "Help Center" },
+  { id: "contact", label: "Contact Us" },
 ];
 
 // ─── Tab Panels ───────────────────────────────────────────────────────────────
@@ -85,7 +85,7 @@ function TermsPanel() {
         className={`accept-btn ${accepted ? "accepted" : ""}`}
         onClick={() => setAccepted(true)}
       >
-        {accepted ? "✓ Términos aceptados" : "He leído y acepto los Términos"}
+        {accepted ? "✓ Terms accepted" : "I have read and accept the Terms"}
       </button>
     </div>
   );
@@ -95,10 +95,9 @@ function PrivacyPanel() {
   return (
     <div className="legal-panel privacy-panel">
       <div className="privacy-card">
-        <h3>Política de Privacidad</h3>
+        <h3>Privacy Policy</h3>
         <p className="privacy-summary">
-          Resumen de información que recopilamos y cómo la utilizamos para
-          brindarte una mejor experiencia.
+          Summary of the information we collect and how we use it to deliver a better experience.
         </p>
         <ul className="privacy-list">
           {PRIVACY_BULLETS.map((b) => (
@@ -108,7 +107,7 @@ function PrivacyPanel() {
             </li>
           ))}
         </ul>
-        <button className="ver-mas-btn">Ver más</button>
+        <button className="ver-mas-btn">Learn more</button>
       </div>
     </div>
   );
@@ -122,17 +121,17 @@ function HelpPanel() {
   return (
     <div className="legal-panel help-panel">
       <div className="help-card">
-        <h3>Centro de Ayuda</h3>
+        <h3>Help Center</h3>
         <div className="search-bar">
           <span className="search-icon">🔍</span>
           <input
             type="text"
-            placeholder="Buscar de ayuda..."
+            placeholder="Search help..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <p className="faq-title">Preguntas Frecuentes</p>
+        <p className="faq-title">Frequently Asked Questions</p>
         <ul className="faq-list">
           {filtered.map((q) => (
             <li key={q} className="faq-item">
@@ -152,7 +151,7 @@ function ContactPanel() {
   return (
     <div className="legal-panel contact-panel">
       <div className="contact-card">
-        <h3>Contáctanos</h3>
+        <h3>Contact Us</h3>
         <div className="contact-info">
           <p>
             <span>✉️</span> soporte@colwork.com
@@ -164,7 +163,7 @@ function ContactPanel() {
         <div className="email-form">
           <input
             type="email"
-            placeholder="Tu email..."
+            placeholder="Your email..."
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -176,7 +175,7 @@ function ContactPanel() {
           </button>
         </div>
         {sent && (
-          <p className="sent-msg">¡Mensaje enviado! Te contactamos pronto.</p>
+          <p className="sent-msg">Message sent! We will contact you shortly.</p>
         )}
         <div className="map-placeholder">
           <span>📍</span>
@@ -394,7 +393,7 @@ export default function Legal() {
 
       <div className="legal-page">
         <div className="legal-header">
-          <h1>Centro de Información Legal y Soporte</h1>
+          <h1>Legal Information & Support Center</h1>
         </div>
 
         <div className="legal-tabs">

@@ -7,43 +7,43 @@ const allSpaces = [
   {
     id: 1, type: 'private',
     img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80',
-    title: 'Executive Suite 402', meta: 'Oficina Privada · 4 Personas',
-    price: 45, amenities: ['📶 Alta velocidad', '☕ Bebidas gratis', '🖨 Impresión'],
+    title: 'Executive Suite 402', meta: 'Private Office · 4 People',
+    price: 45, amenities: ['📶 High-speed Wi-Fi', '☕ Complimentary drinks', '🖨 Printing'],
     badge: 'available',
   },
   {
     id: 2, type: 'hot-desk',
     img: 'https://images.unsplash.com/photo-1604328698692-f76ea9498e76?w=600&q=80',
-    title: 'Open Area Desk 12', meta: 'Hot Desk · 1 Persona',
-    price: 5, amenities: ['🖨 Impresión', '⚡ Carga rápida'],
+    title: 'Open Area Desk 12', meta: 'Hot Desk · 1 Person',
+    price: 5, amenities: ['🖨 Printing', '⚡ Fast charging'],
     badge: null,
   },
   {
     id: 3, type: 'meeting',
     img: 'https://images.unsplash.com/photo-1431540015161-0bf868a2d407?w=600&q=80',
-    title: 'Conference Room B', meta: 'Sala de reunión · 10 Personas',
-    price: 80, amenities: ['📹 Video conf.', '📊 Kit presentación'],
+    title: 'Conference Room B', meta: 'Meeting Room · 10 People',
+    price: 80, amenities: ['📹 Video conference', '📊 Presentation kit'],
     badge: null,
   },
   {
     id: 4, type: 'pod',
     img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80',
-    title: 'Solo Pod 05', meta: 'Oficina Privada · 1 Persona',
-    price: 15, amenities: ['🔊 Insonorizado', '💡 Luz ajustable'],
+    title: 'Solo Pod 05', meta: 'Private Office · 1 Person',
+    price: 15, amenities: ['🔊 Soundproof', '💡 Adjustable lighting'],
     badge: 'popular',
   },
   {
     id: 5, type: 'private',
     img: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80',
-    title: 'Team Office 101', meta: 'Oficina Privada · 6 Personas',
-    price: 60, amenities: ['🖥 Pantalla', '❄ Clima'],
+    title: 'Team Office 101', meta: 'Private Office · 6 People',
+    price: 60, amenities: ['🖥 Display', '❄ Climate control'],
     badge: null,
   },
   {
     id: 6, type: 'hot-desk',
     img: 'https://images.unsplash.com/photo-1600508774634-4e11d34730e2?w=600&q=80',
-    title: 'Lounge Hot Desk', meta: 'Hot Desk · 1 Persona',
-    price: 4, amenities: ['🤛 Zona tranquila', '☕ Café incluido'],
+    title: 'Lounge Hot Desk', meta: 'Hot Desk · 1 Person',
+    price: 4, amenities: ['🤛 Quiet zone', '☕ Coffee included'],
     badge: null,
   },
 ];
@@ -128,7 +128,7 @@ export default function Spaces() {
           <section className="filter-block">
             <h6>Amenities</h6>
             <div className="amenities-grid">
-              {['WiFi rápido','Monitor','Pizarra','Café','Videoconferencia','Aire acondicionado','Luz ajustable','Soundproof'].map(a => (
+              {['Fast WiFi','Monitor','Whiteboard','Coffee','Video conference','Air conditioning','Adjustable lighting','Soundproof'].map(a => (
                 <label key={a} className="check-label">
                   <input type="checkbox" /> {a}
                 </label>
@@ -177,8 +177,8 @@ export default function Spaces() {
               <article key={space.id} className="space-card-item" style={{ animationDelay: `${i * 0.06}s` }}>
                 <div className="card-img-wrap">
                   <img src={space.img} alt={space.title} />
-                  {space.badge === 'available' && <span className="badge badge--available">Disponible hoy</span>}
-                  {space.badge === 'popular' && <span className="badge badge--popular">Más popular</span>}
+                  {space.badge === 'available' && <span className="badge badge--available">Available today</span>}
+                  {space.badge === 'popular' && <span className="badge badge--popular">Most popular</span>}
                   <button
                     className={`fav-btn ${favorites.includes(space.id) ? 'fav-btn--active' : ''}`}
                     onClick={() => toggleFav(space.id)}
@@ -205,7 +205,7 @@ export default function Spaces() {
                     onClick={() => navigate(`/reserva/${space.id}`)}
                     disabled={reserved.includes(space.id)}
                   >
-                    {reserved.includes(space.id) ? '✓ ¡Reservado!' : 'Reservar espacio'}
+                    {reserved.includes(space.id) ? '✓ Reserved!' : 'Reserve space'}
                   </button>
                 </div>
               </article>
