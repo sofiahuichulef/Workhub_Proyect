@@ -252,11 +252,20 @@
     overflow-y: auto;
   }
 
+  .dark .filters-panel {
+    background: #0f172a;
+    border-right-color: rgba(148,163,184,0.18);
+  }
+
   .filters-panel h4 {
     font-size: 1.1rem;
     font-weight: 700;
     color: #0f172a;
     margin-bottom: 24px;
+  }
+
+  .dark .filters-panel h4 {
+    color: #f8fafc;
   }
 
   .filter-block {
@@ -265,11 +274,19 @@
     border-bottom: 1px solid #e2e8f0;
   }
 
+  .dark .filter-block {
+    border-bottom-color: rgba(148,163,184,0.16);
+  }
+
   .filter-block h6 {
     font-size: 0.875rem;
     font-weight: 700;
     color: #0f172a;
     margin-bottom: 14px;
+  }
+
+  .dark .filter-block h6 {
+    color: #f8fafc;
   }
 
   .filter-field { margin-bottom: 14px; }
@@ -282,6 +299,10 @@
     margin-bottom: 6px;
   }
 
+  .dark .filter-field label {
+    color: #cbd5e1;
+  }
+
   .custom-input {
     width: 100%;
     padding: 8px 12px;
@@ -291,6 +312,12 @@
     color: #334155;
     background: #f8fafc;
     outline: none;
+  }
+
+  .dark .custom-input {
+    background: #111827;
+    border-color: rgba(148,163,184,0.18);
+    color: #e2e8f0;
   }
 
   .custom-input:focus { border-color: var(--color-primary); }
@@ -306,6 +333,12 @@
     color: #475569;
     cursor: pointer;
     transition: all 0.2s;
+  }
+
+  .dark .filter-chip {
+    background: #111827;
+    border-color: rgba(148,163,184,0.18);
+    color: #e2e8f0;
   }
 
   .filter-chip:hover, .filter-chip.active {
@@ -370,6 +403,11 @@
     font-weight: 600;
     cursor: pointer;
     transition: background 0.2s;
+  }
+
+  .dark .btn-secondary {
+    background: #111827;
+    color: #e2e8f0;
   }
 
   .btn-secondary:hover { background: #e2e8f0; }

@@ -24,7 +24,12 @@
   align-items: center;
   justify-content: center;
   padding: 32px 20px 40px;
-  background: #f5f7fa;
+  background: var(--color-bg-card);
+  transition: background 0.3s ease;
+}
+
+.dark .form-side {
+  background: #0f172a;
 }
 
 .form-container {
@@ -271,3 +276,76 @@ appearance: none;          /* estándar */
   .login-hero { text-align: left; }
   .login-hero h1 { font-size: 2.2rem; }
 }
+
+/* Dark mode support */
+.dark .form-container {
+  background: rgba(15, 23, 42, 0.92);
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+.dark .login-hero h1,
+.dark .form-group label,
+.dark .label-row a,
+.dark .keep-logged label,
+.dark .create-account span,
+.dark .divider {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.dark .login-hero h3 {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.dark .input-icon-wrap input {
+  background: #111827;
+  border-color: rgba(148, 163, 184, 0.18);
+  color: #fff;
+}
+
+.dark .input-icon-wrap input::placeholder {
+  color: rgba(148, 163, 184, 0.7);
+}
+
+.dark .input-icon {
+  color: rgba(148, 163, 184, 0.8);
+}
+
+.dark .toggle-eye {
+  color: rgba(148, 163, 184, 0.9);
+}
+
+.dark .google-btn,
+.dark .github-btn {
+  background: #111827;
+  color: #fff;
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+.dark .google-btn:hover,
+.dark .github-btn:hover {
+  border-color: var(--color-primary);
+}
+
+.dark .create-account a {
+  color: var(--color-primary);
+}
+
+.dark .coworking-card {
+  background: rgba(15, 23, 42, 0.87);
+  border-color: rgba(148, 163, 184, 0.16);
+}
+
+.dark .coworking-card h3,
+.dark .coworking-card p {
+  color: #fff;
+}
+
+.dark .dot {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.dark .dot.active {
+  background: rgba(255, 255, 255, 0.95);
+}
+

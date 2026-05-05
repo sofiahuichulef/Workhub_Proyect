@@ -12,8 +12,7 @@ export default function Footer() {
               <h2>CoWork</h2>
             </div>
             <p className="description-text">
-              Espacios premium para la optimización del trabajo, diseñados para
-              inspirar la innovación y optimizar el crecimiento de la comunidad.
+              Premium workspaces designed to inspire innovation and accelerate growth for your community.
             </p>
             <div className="social-links">
               <a href="#" className="social-link">🌐</a>

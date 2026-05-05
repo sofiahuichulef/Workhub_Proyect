@@ -46,12 +46,19 @@
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 10px;
+  color: inherit;
 }
 
 .hero-content p {
   font-size: 0.95rem;
   opacity: 0.9;
   line-height: 1.5;
+  color: inherit;
+}
+
+html.dark .hero-content h1,
+html.dark .hero-content p {
+  color: white;
 }
 
 .btn-outline {
@@ -132,12 +139,21 @@
   padding: 16px 8px;
 }
 
+.dark .stat {
+  background-color: var(--color-bg-card);
+  border-color: var(--color-border);
+}
+
 .stat__value {
   color: #1d76e2;
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 4px;
   line-height: 2rem;
+}
+
+.dark .stat__value {
+  color: var(--color-white);
 }
 
 .stat__label {
@@ -213,13 +229,13 @@
 .card__title {
   font-size: 1rem;
   margin-bottom: 6px;
-  color: var(--color-dark);
+  color: var(--color-bg-light);
   font-weight: 600;
 }
 
 .card__text {
   font-size: 0.85rem;
-  color: var(--color-gray-1);
+  color: var(--color-gray-2);
   line-height: 1.5;
   margin: 0;
 }
@@ -227,7 +243,16 @@
 /* ===== OUR SPACES ===== */
 .spaces {
   padding: 48px 20px;
-  background: #f8fafc;
+  background: var(--color-bg-card);
+}
+
+.dark .spaces {
+  background: var(--color-bg-light);
+}
+
+/* Clase para ocultar antes de animar */
+.opacity-0 {
+  opacity: 0;
 }
 
 .spaces-container {
@@ -251,10 +276,18 @@
   margin-bottom: 4px;
 }
 
+.dark .spaces-header h2 {
+  color: var(--white-90);
+}
+
 .spaces-header p {
   color: var(--color-gray-3);
   font-size: 0.875rem;
   margin: 0;
+}
+
+.dark .spaces-header p {
+  color: var(--white-90);
 }
 
 .view-link {

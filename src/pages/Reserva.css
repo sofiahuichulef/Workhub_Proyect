@@ -446,6 +446,140 @@
   font-weight: 600;
 }
 
+/* Dark Mode */
+.dark .reserva-page {
+  background: var(--color-bg-card);
+}
+
+.dark .reserva-tabs {
+  background: var(--color-bg-card);
+  border-color: var(--color-border);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+}
+
+.dark .tab-btn {
+  color: var(--color-gray-2);
+}
+
+.dark .tab-btn--active {
+  color: var(--color-primary);
+}
+
+.dark .tab-btn:hover:not(.tab-btn--active) {
+  color: var(--color-white);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dark .reserva-container {
+  color: var(--color-white);
+}
+
+.dark .reserva-form-section,
+.dark .historial-section,
+.dark .reserva-card,
+.dark .resumen-reserva,
+.dark .reserva-success,
+.dark .reserva-not-found {
+  background: var(--color-bg-card-alt);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+}
+
+.dark .reserva-form h3,
+.dark .historial-section h3,
+.dark .reserva-success h2,
+.dark .reserva-card-header h4,
+.dark .reserva-not-found h2,
+.dark .reserva-hero-meta,
+.dark .resumen-reserva h4,
+.dark .resumen-item,
+.dark .resumen-total,
+.dark .reserva-success p,
+.dark .reserva-info span:last-child,
+.dark .info-label,
+.dark .no-reservas,
+.dark .reserva-not-found,
+.dark .no-reservas button {
+  color: var(--color-white);
+}
+
+.dark .reserva-hero-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(8, 16, 32, 0.9) 0%,
+    rgba(20, 40, 70, 0.8) 50%,
+    rgba(15, 31, 63, 0.75) 100%
+  );
+}
+
+.dark .back-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.dark .back-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.dark .form-group label {
+  color: var(--color-gray-2);
+}
+
+.dark .form-group input,
+.dark .form-group select,
+.dark .form-group textarea {
+  background: var(--color-bg-light);
+  border-color: var(--color-border);
+  color: var(--color-white);
+}
+
+.dark .form-group input::placeholder,
+.dark .form-group textarea::placeholder {
+  color: var(--white-50);
+}
+
+.dark .form-group input:focus,
+.dark .form-group select:focus,
+.dark .form-group textarea:focus {
+  background: var(--color-bg-card);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(139,92,246,0.12);
+}
+
+.dark .resumen-reserva {
+  background: var(--color-bg-light);
+}
+
+.dark .resumen-item {
+  border-color: rgba(148,163,184,0.16);
+}
+
+.dark .reserva-card {
+  border-color: var(--color-border);
+}
+
+.dark .reserva-card:hover {
+  border-color: rgba(139, 92, 246, 0.4);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.08);
+}
+
+.dark .submit-btn {
+  box-shadow: 0 8px 25px rgba(139,92,246,0.35);
+}
+
+.dark .success-icon {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+}
+
+.dark .no-reservas button,
+.dark .reserva-not-found button {
+  background: #8b5cf6;
+}
+
+.dark .no-reservas button:hover,
+.dark .reserva-not-found button:hover {
+  background: #7c3aed;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .reserva-hero {

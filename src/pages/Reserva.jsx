@@ -34,49 +34,49 @@ const allSpaces = [
     id: 1,
     img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80',
     title: 'Executive Suite 402',
-    meta: 'Oficina Privada · 4 Personas',
+    meta: 'Private Office · 4 People',
     price: 45,
-    amenities: ['📶 Alta velocidad', '☕ Bebidas gratis', '🖨 Impresión'],
+    amenities: ['📶 High-speed Wi-Fi', '☕ Complimentary drinks', '🖨 Printing'],
   },
   {
     id: 2,
     img: 'https://images.unsplash.com/photo-1604328698692-f76ea9498e76?w=600&q=80',
     title: 'Open Area Desk 12',
-    meta: 'Hot Desk · 1 Persona',
+    meta: 'Hot Desk · 1 Person',
     price: 5,
-    amenities: ['🖨 Impresión', '⚡ Carga rápida'],
+    amenities: ['🖨 Printing', '⚡ Fast charging'],
   },
   {
     id: 3,
     img: 'https://images.unsplash.com/photo-1431540015161-0bf868a2d407?w=600&q=80',
     title: 'Conference Room B',
-    meta: 'Sala de reunión · 10 Personas',
+    meta: 'Meeting Room · 10 People',
     price: 80,
-    amenities: ['📹 Video conf.', '📊 Kit presentación'],
+    amenities: ['📹 Video conference', '📊 Presentation kit'],
   },
   {
     id: 4,
     img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80',
     title: 'Solo Pod 05',
-    meta: 'Oficina Privada · 1 Persona',
+    meta: 'Private Office · 1 Person',
     price: 15,
-    amenities: ['🔊 Insonorizado', '💡 Luz ajustable'],
+    amenities: ['🔊 Soundproof', '💡 Adjustable lighting'],
   },
   {
     id: 5,
     img: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80',
     title: 'Team Office 101',
-    meta: 'Oficina Privada · 6 Personas',
+    meta: 'Private Office · 6 People',
     price: 60,
-    amenities: ['🖥 Pantalla', '❄ Clima'],
+    amenities: ['🖥 Display', '❄ Climate control'],
   },
   {
     id: 6,
     img: 'https://images.unsplash.com/photo-1600508774634-4e11d34730e2?w=600&q=80',
     title: 'Lounge Hot Desk',
-    meta: 'Hot Desk · 1 Persona',
+    meta: 'Hot Desk · 1 Person',
     price: 4,
-    amenities: ['🤛 Zona tranquila', '☕ Café incluido'],
+    amenities: ['🤛 Quiet zone', '☕ Coffee included'],
   },
 ];
 
@@ -107,10 +107,10 @@ export default function Reserva() {
 
   const getEstadoBadge = (estado) => {
     const estados = {
-      confirmada: { label: 'Confirmada', class: 'badge--confirmed' },
-      completada: { label: 'Completada', class: 'badge--completed' },
-      cancelada: { label: 'Cancelada', class: 'badge--cancelled' },
-      pendiente: { label: 'Pendiente', class: 'badge--pending' },
+      confirmada: { label: 'Confirmed', class: 'badge--confirmed' },
+      completada: { label: 'Completed', class: 'badge--completed' },
+      cancelada: { label: 'Cancelled', class: 'badge--cancelled' },
+      pendiente: { label: 'Pending', class: 'badge--pending' },
     };
     return estados[estado] || estados.pendiente;
   };
@@ -119,8 +119,8 @@ export default function Reserva() {
     return (
       <div className="reserva-page" style={{ paddingTop: '70px' }}>
         <div className="reserva-not-found">
-          <h2>Espacio no encontrado</h2>
-          <button onClick={() => navigate('/spaces')}>Volver a espacios</button>
+          <h2>Space not found</h2>
+          <button onClick={() => navigate('/spaces')}>Back to spaces</button>
         </div>
       </div>
     );
@@ -136,13 +136,13 @@ export default function Reserva() {
         </div>
         <div className="reserva-hero-content">
           <button className="back-btn" onClick={() => navigate('/spaces')}>
-            ← Volver a espacios
+            ← Back to spaces
           </button>
           <h1>{espacio.title}</h1>
           <p className="reserva-hero-meta">{espacio.meta}</p>
           <div className="reserva-hero-price">
             <span className="price-amount">${espacio.price}</span>
-            <span className="price-unit">/hora</span>
+            <span className="price-unit">/hr</span>
           </div>
         </div>
       </header>
@@ -153,13 +153,13 @@ export default function Reserva() {
           className={`tab-btn ${activeTab === 'reservar' ? 'tab-btn--active' : ''}`}
           onClick={() => setActiveTab('reservar')}
         >
-          📅 Nueva Reserva
+          📅 New Reservation
         </button>
         <button
           className={`tab-btn ${activeTab === 'historial' ? 'tab-btn--active' : ''}`}
           onClick={() => setActiveTab('historial')}
         >
-          📋 Mis Reservas
+          📋 My Reservations
         </button>
       </div>
 
@@ -170,16 +170,16 @@ export default function Reserva() {
             {reservaEnviada ? (
               <div className="reserva-success">
                 <div className="success-icon">✓</div>
-                <h2>¡Reserva enviada!</h2>
-                <p>Recibirás un correo de confirmación pronto.</p>
+                <h2>Reservation sent!</h2>
+                <p>You will receive a confirmation email soon.</p>
               </div>
             ) : (
               <form className="reserva-form" onSubmit={handleSubmit}>
-                <h3>Detalles de la reserva</h3>
+                <h3>Reservation details</h3>
                 
                 <div className="form-row">
                   <div className="form-group">
-                    <label>Fecha</label>
+                    <label>Date</label>
                     <input
                       type="date"
                       required
@@ -191,7 +191,7 @@ export default function Reserva() {
 
                 <div className="form-row">
                   <div className="form-group">
-                    <label>Hora de inicio</label>
+                    <label>Start time</label>
                     <select
                       value={formData.horaInicio}
                       onChange={(e) => setFormData({ ...formData, horaInicio: e.target.value })}
@@ -202,7 +202,7 @@ export default function Reserva() {
                     </select>
                   </div>
                   <div className="form-group">
-                    <label>Hora de fin</label>
+                    <label>End time</label>
                     <select
                       value={formData.horaFin}
                       onChange={(e) => setFormData({ ...formData, horaFin: e.target.value })}
@@ -216,10 +216,10 @@ export default function Reserva() {
 
                 <div className="form-row">
                   <div className="form-group">
-                    <label>Nombre completo</label>
+                    <label>Full name</label>
                     <input
                       type="text"
-                      placeholder="Tu nombre"
+                      placeholder="Your name"
                       required
                       value={formData.nombre}
                       onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
@@ -229,7 +229,7 @@ export default function Reserva() {
                     <label>Email</label>
                     <input
                       type="email"
-                      placeholder="tu@email.com"
+                      placeholder="you@example.com"
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -238,9 +238,9 @@ export default function Reserva() {
                 </div>
 
                 <div className="form-group">
-                  <label>Notas adicionales (opcional)</label>
+                  <label>Additional notes (optional)</label>
                   <textarea
-                    placeholder="Alguna necesidad especial..."
+                    placeholder="Any special requests..."
                     rows={3}
                     value={formData.notas}
                     onChange={(e) => setFormData({ ...formData, notas: e.target.value })}
@@ -248,30 +248,30 @@ export default function Reserva() {
                 </div>
 
                 <div className="resumen-reserva">
-                  <h4>Resumen</h4>
+                  <h4>Summary</h4>
                   <div className="resumen-item">
-                    <span>Espacio</span>
+                    <span>Space</span>
                     <span>{espacio.title}</span>
                   </div>
                   <div className="resumen-item">
-                    <span>Tarifa por hora</span>
+                    <span>Hourly rate</span>
                     <span>${espacio.price}</span>
                   </div>
                   <div className="resumen-total">
-                    <span>Total estimado</span>
+                    <span>Estimated total</span>
                     <span>${espacio.price * 2}</span>
                   </div>
                 </div>
 
                 <button type="submit" className="submit-btn">
-                  Confirmar Reserva
+                  Confirm Reservation
                 </button>
               </form>
             )}
           </div>
         ) : (
           <div className="historial-section">
-            <h3>Historial de reservas</h3>
+            <h3>Reservation History</h3>
             {mockReservasAnteriores.length > 0 ? (
               <div className="reservas-list">
                 {mockReservasAnteriores.map((reserva) => {
@@ -286,11 +286,11 @@ export default function Reserva() {
                       </div>
                       <div className="reserva-card-body">
                         <div className="reserva-info">
-                          <span className="info-label">📅 Fecha</span>
+                          <span className="info-label">📅 Date</span>
                           <span>{reserva.fecha}</span>
                         </div>
                         <div className="reserva-info">
-                          <span className="info-label">🕐 Horario</span>
+                          <span className="info-label">🕐 Schedule</span>
                           <span>{reserva.hora}</span>
                         </div>
                         <div className="reserva-info">
@@ -304,9 +304,9 @@ export default function Reserva() {
               </div>
             ) : (
               <div className="no-reservas">
-                <p>No tienes reservas anteriores.</p>
+                <p>You have no previous reservations.</p>
                 <button onClick={() => setActiveTab('reservar')}>
-                  Hacer una reserva
+                  Make a reservation
                 </button>
               </div>
             )}

@@ -5,6 +5,12 @@
   width: 100%;
   z-index: 1000;
   box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.dark .navbar {
+  background-color: rgba(15,23,42,0.94);
+  box-shadow: 0 1px 18px rgba(0,0,0,0.4);
 }
 
 .navbar-inner {
@@ -30,6 +36,8 @@
   font-size: 1rem;
   margin: 0;
   font-weight: 700;
+  animation-duration: 2s;      /* la animación dura 2 segundos */
+  animation-delay: 0.3s;       /* espera 0.3 segundos antes de empezar */
 }
 
 .btn-login {
@@ -86,14 +94,13 @@
   top: 100%;
   left: 0;
   right: 0;
-  background: white;
-  border-top: 1px solid #f0f0f0;
+  background: var(--color-bg-card);
+  border-top: 1px solid var(--color-border);
   box-shadow: 0 8px 24px rgba(0,0,0,0.08);
   padding: 8px 16px 16px;
   z-index: 999;
+  transition: background 0.4s ease, border-color 0.4s ease;
 }
-
-.nav-menu--open { display: block; }
 
 .nav-links {
   list-style: none;
@@ -109,11 +116,43 @@
   font-size: 0.95rem;
   padding: 12px 4px;
   display: block;
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid var(--color-border);
   transition: color 0.2s;
 }
 
 .nav-link:hover { color: var(--color-primary); }
+
+.dark .nav-link { color: var(--white-90); }
+
+.theme-toggle {
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-soft);
+  color: var(--color-dark);
+  border-radius: 999px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.theme-toggle:hover {
+  background: var(--color-blue-soft);
+  border-color: var(--color-primary);
+}
+
+.dark .theme-toggle {
+  background: rgba(255,255,255,0.08);
+  color: var(--color-white);
+  border-color: rgba(255,255,255,0.15);
+}
+
+.mobile-only {
+  display: inline-flex;
+}
 
 .desktop-only { display: none !important; }
 
@@ -121,6 +160,7 @@
 @media (min-width: 992px) {
   .navbar-inner { padding: 10px 32px; }
 
+  .mobile-only { display: none !important; }
   .mobile-controls .btn-login { display: none; }
   .hamburger { display: none; }
 

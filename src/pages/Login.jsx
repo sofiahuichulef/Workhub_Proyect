@@ -12,11 +12,11 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !password) {
-      alert('Por favor, completa todos los campos.');
+      alert('Please complete all fields.');
       return;
     }
     console.log('Email:', email, 'Password:', password, 'Keep logged:', keepLogged);
-    alert('¡Bienvenido de nuevo a CoWork Hub!');
+    alert('Welcome back to CoWork Hub!');
   };
 
   return (
@@ -26,8 +26,8 @@ export default function Login() {
           {/* Left side - coworking image */}
           <div className="coworking-side">
             <div className="coworking-card">
-              <h3>Bienvenido a CoWork</h3>
-              <p>Espacios de coworking inspiradores para equipos y freelancers. Reserva tu mesa, oficina privada o sala de reuniones y crece en comunidad.</p>
+              <h3>Welcome to CoWork</h3>
+              <p>Inspiring coworking spaces for teams and freelancers. Book your desk, private office, or meeting room and grow with our community.</p>
             </div>
           </div>
 
