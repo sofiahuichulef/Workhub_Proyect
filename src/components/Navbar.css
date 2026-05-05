@@ -4,13 +4,15 @@
   top: 0;
   width: 100%;
   z-index: 1000;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
-  transition: background 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+  transition:
+    background 0.4s ease,
+    box-shadow 0.4s ease;
 }
 
 .dark .navbar {
-  background-color: rgba(15,23,42,0.94);
-  box-shadow: 0 1px 18px rgba(0,0,0,0.4);
+  background-color: rgba(15, 23, 42, 0.94);
+  box-shadow: 0 1px 18px rgba(0, 0, 0, 0.4);
 }
 
 .navbar-inner {
@@ -28,7 +30,9 @@
   gap: 8px;
 }
 
-.logo { width: 2.5rem; }
+.logo {
+  width: 2.5rem;
+}
 
 .title-text {
   font-family: "Plus Jakarta Sans", sans-serif;
@@ -36,8 +40,8 @@
   font-size: 1rem;
   margin: 0;
   font-weight: 700;
-  animation-duration: 2s;      /* la animación dura 2 segundos */
-  animation-delay: 0.3s;       /* espera 0.3 segundos antes de empezar */
+  animation-duration: 2s; /* la animación dura 2 segundos */
+  animation-delay: 0.3s; /* espera 0.3 segundos antes de empezar */
 }
 
 .btn-login {
@@ -54,7 +58,10 @@
   white-space: nowrap;
 }
 
-.btn-login:hover { opacity: 0.88; color: var(--color-white); }
+.btn-login:hover {
+  opacity: 0.88;
+  color: var(--color-white);
+}
 
 /* Mobile controls: login + hamburger */
 .mobile-controls {
@@ -83,9 +90,15 @@
   transition: all 0.3s;
 }
 
-.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
 
 /* Dropdown menu on mobile */
 .nav-menu {
@@ -96,10 +109,12 @@
   right: 0;
   background: var(--color-bg-card);
   border-top: 1px solid var(--color-border);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   padding: 8px 16px 16px;
   z-index: 999;
-  transition: background 0.4s ease, border-color 0.4s ease;
+  transition:
+    background 0.4s ease,
+    border-color 0.4s ease;
 }
 
 .nav-links {
@@ -120,9 +135,18 @@
   transition: color 0.2s;
 }
 
-.nav-link:hover { color: var(--color-primary); }
+.nav-link:hover {
+  color: var(--color-primary);
+}
 
-.dark .nav-link { color: var(--white-90); }
+/* Menú desplegable activo en mobile */
+.nav-menu--open {
+  display: block;
+}
+
+.dark .nav-link {
+  color: var(--white-90);
+}
 
 .theme-toggle {
   border: 1px solid var(--color-border);
@@ -131,7 +155,10 @@
   border-radius: 999px;
   padding: 8px 12px;
   cursor: pointer;
-  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -145,24 +172,34 @@
 }
 
 .dark .theme-toggle {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   color: var(--color-white);
-  border-color: rgba(255,255,255,0.15);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .mobile-only {
   display: inline-flex;
 }
 
-.desktop-only { display: none !important; }
+.desktop-only {
+  display: none !important;
+}
 
 /* ===== DESKTOP (992px+) ===== */
 @media (min-width: 992px) {
-  .navbar-inner { padding: 10px 32px; }
+  .navbar-inner {
+    padding: 10px 32px;
+  }
 
-  .mobile-only { display: none !important; }
-  .mobile-controls .btn-login { display: none; }
-  .hamburger { display: none; }
+  .mobile-only {
+    display: none !important;
+  }
+  .mobile-controls .btn-login {
+    display: none;
+  }
+  .hamburger {
+    display: none;
+  }
 
   .nav-menu {
     display: flex !important;
@@ -192,7 +229,14 @@
     margin-left: 20px;
   }
 
-  .logo { width: 3rem; }
-  .title-text { font-size: 1.1rem; }
-  .btn-login { font-size: 0.875rem; padding: 8px 16px; }
+  .logo {
+    width: 3rem;
+  }
+  .title-text {
+    font-size: 1.1rem;
+  }
+  .btn-login {
+    font-size: 0.875rem;
+    padding: 8px 16px;
+  }
 }
