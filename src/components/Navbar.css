@@ -117,6 +117,10 @@
     border-color 0.4s ease;
 }
 
+.nav-menu.nav-menu--open {
+  display: block;
+}
+
 .nav-links {
   list-style: none;
   padding: 0;
