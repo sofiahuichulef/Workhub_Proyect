@@ -10,7 +10,7 @@ export default function Navbar({ theme, onToggleTheme }) {
       <nav className="navbar">
         <div className="container-fluid navbar-inner">
           <Link to="/" className="title">
-            <img className="logo" src="/logo.jpg" alt="Logo WorkHub Coworking" />
+            <img className="logo" src="/logo.png" alt="Logo WorkHub Coworking" />
             <h2 className="title-text animate__animated animate__bounceInLeft">CoWork</h2>
           </Link>
 
