@@ -99,7 +99,7 @@ export default function Login() {
 
               <div className="create-account">
                 <span>Don't have an account?</span>
-                <a href="#">Create an account</a>
+                <Link to="/register">Create an account</Link>
               </div>
             </div>
           </div>

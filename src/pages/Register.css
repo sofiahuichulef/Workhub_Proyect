@@ -1,0 +1,344 @@
+/* =====================================================
+   REGISTER PAGE
+   ===================================================== */
+
+.reg-page-wrapper {
+  min-height: 100vh;
+  padding-top: 56px; /* altura del navbar */
+  background: #F8FAFC;
+}
+
+.reg-split {
+  display: flex;
+  min-height: calc(100vh - 56px);
+}
+
+/* ── Panel izquierdo (imagen) ── */
+.reg-coworking-side {
+  flex: 1;
+  position: relative;
+  background: url('/coworking2.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: flex-end;
+  padding: 40px;
+}
+
+.reg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15,23,42,0.85) 40%, rgba(15,23,42,0.3));
+}
+
+.reg-side-card {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+}
+
+.reg-side-card h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.reg-side-card p {
+  color: #CBD5E1;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.reg-side-stats {
+  display: flex;
+  gap: 28px;
+}
+
+.reg-side-stats div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reg-side-stats strong {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.reg-side-stats span {
+  font-size: 0.72rem;
+  color: #94A3B8;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── Panel derecho (formulario) ── */
+.reg-form-side {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  background: #fff;
+}
+
+.reg-form-container {
+  width: 100%;
+  max-width: 460px;
+}
+
+.reg-hero {
+  margin-bottom: 28px;
+}
+
+.reg-hero h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1E293B;
+  margin-bottom: 6px;
+}
+
+.reg-hero p {
+  color: #64748B;
+  font-size: 0.9rem;
+}
+
+/* ── Form fields ── */
+.reg-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.reg-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.reg-group label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 6px;
+}
+
+.reg-optional {
+  font-weight: 400;
+  color: #94A3B8;
+}
+
+.reg-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.reg-icon {
+  position: absolute;
+  left: 12px;
+  font-size: 0.9rem;
+  color: #94A3B8;
+  pointer-events: none;
+}
+
+.reg-group input,
+.reg-input-wrap input {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  color: #1E293B;
+  background: #F8FAFC;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+/* inputs sin ícono (nombre/apellido) */
+.reg-row .reg-group input {
+  padding-left: 12px;
+}
+
+.reg-group input:focus,
+.reg-input-wrap input:focus {
+  border-color: #1D76E2;
+  box-shadow: 0 0 0 3px rgba(29,118,226,0.12);
+  background: #fff;
+}
+
+.reg-eye {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0;
+  line-height: 1;
+}
+
+/* ── Barra de fortaleza ── */
+.reg-strength {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.reg-strength-bars {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+
+.reg-strength-bar {
+  flex: 1;
+  height: 4px;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.reg-strength span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  min-width: 36px;
+}
+
+.reg-mismatch {
+  font-size: 0.75rem;
+  color: #ef4444;
+  margin-top: 4px;
+}
+
+/* ── Términos ── */
+.reg-terms {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 0.82rem;
+  color: #475569;
+}
+
+.reg-terms input[type="checkbox"] {
+  margin-top: 2px;
+  accent-color: #1D76E2;
+  flex-shrink: 0;
+}
+
+.reg-terms a {
+  color: #1D76E2;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* ── Botón principal ── */
+.reg-submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: #1D76E2;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.reg-submit-btn:hover { background: #1558B0; }
+.reg-submit-btn:active { transform: scale(0.98); }
+
+/* ── Divider ── */
+.reg-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 22px 0;
+  color: #94A3B8;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+.reg-divider::before,
+.reg-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #E2E8F0;
+}
+
+/* ── Social buttons ── */
+.reg-social {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.reg-google-btn,
+.reg-github-btn {
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.reg-google-btn {
+  background: #fff;
+  border: 1.5px solid #E2E8F0;
+  color: #334155;
+}
+
+.reg-google-btn:hover { background: #F1F5F9; }
+
+.reg-github-btn {
+  background: #1E293B;
+  border: 1.5px solid #1E293B;
+  color: #fff;
+}
+
+.reg-github-btn:hover { background: #0F172A; }
+
+/* ── Ya tienes cuenta ── */
+.reg-signin {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #64748B;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.reg-signin a {
+  color: #1D76E2;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* =====================================================
+   RESPONSIVE (≤ 768px)
+   ===================================================== */
+@media (max-width: 768px) {
+  .reg-coworking-side { display: none; }
+
+  .reg-form-side {
+    padding: 32px 20px;
+    align-items: flex-start;
+    min-height: calc(100vh - 56px);
+  }
+
+  .reg-form-container {
+    max-width: 100%;
+  }
+}
+
+/* ── Nombre + apellido en 2 columnas hasta 359px ── */
+@media (max-width: 359px) {
+  .reg-row {
+    grid-template-columns: 1fr;
+  }
+}
