@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Spaces from './pages/Spaces';
 import Reserva from './pages/Reserva';
 import Pricing from './pages/Pricing';
+import Register from './pages/Register';
 import Legal from './pages/Legal';
 import Amenities from './pages/Amenities';
 import About from  './pages/About';
@@ -49,6 +50,7 @@ export default function App() {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/legal" element={<Legal />} />
         <Route path="/about" element={<About />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );
