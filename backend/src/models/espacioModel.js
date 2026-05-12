@@ -1,7 +1,7 @@
 const espacios = [
   {
     id: 1,
-    nombre: "Sala Creativa A",
+    nombre: "Room A - Reunion room",
     tipo: "sala_reunion",
     capacidad: 8,
     precio: 15000,
@@ -11,7 +11,7 @@ const espacios = [
   },
   {
     id: 2,
-    nombre: "Escritorio Privado 1",
+    nombre: "Desk 1 - Individual Space",
     tipo: "escritorio",
     capacidad: 1,
     precio: 8000,
@@ -21,7 +21,7 @@ const espacios = [
   },
   {
     id: 3,
-    nombre: "Oficina Premium",
+    nombre: "Premium Office",
     tipo: "oficina",
     capacidad: 4,
     precio: 25000,
@@ -31,7 +31,7 @@ const espacios = [
   },
   {
     id: 4,
-    nombre: "Zona Colaborativa",
+    nombre: "Common Workhub Area",
     tipo: "open_space",
     capacidad: 20,
     precio: 5000,
@@ -41,7 +41,7 @@ const espacios = [
   },
   {
     id: 5,
-    nombre: "Sala de Conferencias",
+    nombre: "Room B - Conference Room",
     tipo: "sala_reunion",
     capacidad: 20,
     precio: 35000,
@@ -51,7 +51,7 @@ const espacios = [
   },
   {
     id: 6,
-    nombre: "Escritorio Privado 2",
+    nombre: "Desk 2 - Hot Desk",
     tipo: "escritorio",
     capacidad: 1,
     precio: 8000,
@@ -61,7 +61,7 @@ const espacios = [
   },
   {
     id: 7,
-    nombre: "Oficina Estándar B",
+    nombre: "Executive Office - C",
     tipo: "oficina",
     capacidad: 3,
     precio: 18000,
@@ -71,7 +71,7 @@ const espacios = [
   },
   {
     id: 8,
-    nombre: "Sala Creativa B",
+    nombre: "Room F - Creative Space",
     tipo: "sala_reunion",
     capacidad: 6,
     precio: 12000,
