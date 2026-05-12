@@ -13,5 +13,5 @@ router.post('/:id', crearReserva);
 
 router.delete('/:id', eliminarReserva);
 router.put('/:id', validateReserva, actualizarReserva);
-
+router.post('/', validateReserva, crearReserva)
 export default router;

@@ -1,49 +1,89 @@
-import espaciosData from '../data/espacios.json'
-import reservasData from '../data/reservas.json'
-
-// Simula delay de red
-const delay = (ms = 300) => new Promise(resolve => setTimeout(resolve, ms))
-
-// ─── ESPACIOS ─────────────────────────────────────────────────────────────────
+const BASE = import.meta.env.VITE_API_URL
 
 export const getEspacios = async () => {
-  await delay()
-  return espaciosData
-}
+  const res = await fetch(`${BASE}/espacios`)
 
+  if (!res.ok) {
+    throw new Error('Error al obtener espacios')
+  }
+
+  const data = await res.json()
+
+  // Transformar backend → frontend
+  return data.map((space) => ({
+    id: space.id,
+    title: space.nombre,
+    type:
+  space.tipo === 'escritorio'
+    ? 'hot-desk'
+    : space.tipo === 'oficina'
+    ? 'private'
+    : space.tipo === 'sala_reunion'
+    ? 'meeting'
+    : space.tipo === 'open_space'
+    ? 'pod'
+    : 'other',
+    img: space.imagen,
+    price: space.precio,
+    meta: `${space.capacidad} personas`,
+    amenities: [
+      space.disponible ? '✅ Disponible' : '❌ No disponible'
+    ],
+    badge: space.disponible ? 'available' : null
+  }))
+}
 export const getEspacioById = async (id) => {
-  await delay()
-  const espacio = espaciosData.find(e => e.id === Number(id))
-  if (!espacio) throw new Error(`Espacio con id ${id} no encontrado`)
-  return espacio
-}
+  const res = await fetch(`${BASE}/espacios/${id}`)
 
+  if (!res.ok) {
+    throw new Error('Espacio no encontrado')
+  }
+
+  return res.json()
+}
 export const getEspaciosByTipo = async (tipo) => {
-  await delay()
-  if (tipo === 'todos') return espaciosData
-  return espaciosData.filter(e => e.tipo === tipo)
-}
+  const espacios = await getEspacios()
 
-// ─── RESERVAS ─────────────────────────────────────────────────────────────────
+  if (tipo === 'todos') {
+    return espacios
+  }
+
+  return espacios.filter((e) => e.tipo === tipo)
+}
+// ─── RESERVAS ───────────────────────────────────────────────────────────────
 
 export const getReservas = async () => {
-  await delay()
-  return reservasData
-}
+  const res = await fetch(`${BASE}/reservas`)
 
-export const crearReserva = async (nuevaReserva) => {
-  await delay(500)
-  // En producción esto sería un POST al servidor
-  const reservaConId = {
-    id: Date.now(),
-    estado: 'pendiente',
-    ...nuevaReserva
+  if (!res.ok) {
+    throw new Error('Error al obtener reservas')
   }
-  return reservaConId
-}
 
+  return res.json()
+}
+export const crearReserva = async (datos) => {
+  const res = await fetch(`${BASE}/reservas`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(datos)
+  })
+
+  if (!res.ok) {
+    throw new Error('Error al crear reserva')
+  }
+
+  return res.json()
+}
 export const cancelarReserva = async (id) => {
-  await delay()
-  // En producción sería un DELETE o PATCH
-  return { success: true, id }
+  const res = await fetch(`${BASE}/reservas/${id}`, {
+    method: 'DELETE'
+  })
+
+  if (!res.ok) {
+    throw new Error('Error al cancelar reserva')
+  }
+
+  return res.json()
 }
