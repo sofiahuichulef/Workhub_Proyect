@@ -1,16 +1,18 @@
-import { Router } from 'express'
-
+import { Router } from 'express';
 import {
   getEspacios,
-  getEspacioById
-} from '../controllers/espaciosController.js'
+  getEspacioById,
+  crearEspacio,
+  actualizarEspacio,
+  eliminarEspacio,
+} from '../controllers/espaciosController.js';
 
-const router = Router()
+const router = Router();
 
-// GET /espacios
-router.get('/', getEspacios)
+router.get('/', getEspacios);
+router.get('/:id', getEspacioById);
+router.post('/', crearEspacio);
+router.put('/:id', actualizarEspacio);
+router.delete('/:id', eliminarEspacio);
 
-// GET /espacios/:id
-router.get('/:id', getEspacioById)
-
-export default router
+export default router;
