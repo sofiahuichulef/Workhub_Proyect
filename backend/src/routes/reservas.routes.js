@@ -1,17 +1,19 @@
-import express from 'express';
-import { getAll } from "../models/reservaModel.js";
-import { crearReserva, eliminarReserva, actualizarReserva } from '../controllers/reservasController.js'; // 👈 agrega crearReserva
-import validateReserva from "../middlewares/validateReserva.js";
-const router = express.Router();
+import { Router } from 'express';
+import {
+  getReservas,
+  getReservaById,
+  crearReserva,
+  actualizarReserva,
+  eliminarReserva,
+} from '../controllers/reservasController.js';
+import validateReserva from '../middlewares/validateReserva.js';
 
-router.get('/', (req, res) => {
-  res.json(getAll());
-});
+const router = Router();
 
-
-router.post('/:id', crearReserva);
-
+router.get('/', getReservas);
+router.get('/:id', getReservaById);
+router.post('/', validateReserva, crearReserva);
+router.put('/:id', actualizarReserva);
 router.delete('/:id', eliminarReserva);
-router.put('/:id', validateReserva, actualizarReserva);
-router.post('/', validateReserva, crearReserva)
+
 export default router;

@@ -1,110 +1,82 @@
-import { v4 as uuidv4 } from 'uuid';
+import mongoose from 'mongoose';
 
-let reservas = [
+const { Schema } = mongoose;
+
+// Validador para formato de hora HH:MM (24h)
+const HORA_REGEX = /^([01]\d|2[0-3]):([0-5]\d)$/;
+
+/**
+ * Modelo Reserva
+ * Representa la reserva de un espacio por parte de un usuario.
+ * Referencia (relación) a Usuario y Espacio via ObjectId.
+ * El populate() se aplica en el controlador al consultar.
+ */
+const reservaSchema = new Schema(
   {
-    id: "1",
-    espacioId: 1,
-    espacioNombre: "Sala Creativa A",
-    usuario: "Ana Martínez",
-    email: "ana@email.com",
-    fecha: "2025-04-10",
-    horaInicio: "09:00",
-    horaFin: "11:00",
-    estado: "confirmada"
+    usuario: {
+      type: Schema.Types.ObjectId,
+      ref: 'Usuario',
+      required: [true, 'La reserva debe estar asociada a un usuario'],
+    },
+    espacio: {
+      type: Schema.Types.ObjectId,
+      ref: 'Espacio',
+      required: [true, 'La reserva debe estar asociada a un espacio'],
+    },
+    fecha: {
+      type: Date,
+      required: [true, 'La fecha de la reserva es obligatoria'],
+      validate: {
+        validator: (v) => v instanceof Date && !Number.isNaN(v.getTime()),
+        message: 'La fecha de la reserva no es válida',
+      },
+    },
+    horaInicio: {
+      type: String,
+      required: [true, 'La hora de inicio es obligatoria'],
+      match: [HORA_REGEX, 'La hora de inicio debe tener el formato HH:MM (24h)'],
+    },
+    horaFin: {
+      type: String,
+      required: [true, 'La hora de fin es obligatoria'],
+      match: [HORA_REGEX, 'La hora de fin debe tener el formato HH:MM (24h)'],
+    },
+    estado: {
+      type: String,
+      enum: {
+        values: ['pendiente', 'confirmada', 'cancelada', 'completada'],
+        message: 'Estado inválido. Debe ser: pendiente, confirmada, cancelada o completada',
+      },
+      default: 'pendiente',
+    },
+    notas: {
+      type: String,
+      trim: true,
+      maxlength: [300, 'Las notas no pueden superar los 300 caracteres'],
+      default: '',
+    },
   },
   {
-    id: "2",
-    espacioId: 4,
-    espacioNombre: "Zona Colaborativa",
-    usuario: "Carlos López",
-    email: "carlos@email.com",
-    fecha: "2025-04-11",
-    horaInicio: "14:00",
-    horaFin: "18:00",
-    estado: "pendiente"
-  },
-  {
-    id: "3",
-    espacioId: 2,
-    espacioNombre: "Escritorio Privado 1",
-    usuario: "Sofía Ruiz",
-    email: "sofia@email.com",
-    fecha: "2025-04-12",
-    horaInicio: "08:00",
-    horaFin: "17:00",
-    estado: "confirmada"
-  },
-  {
-    id: "4",
-    espacioId: 5,
-    espacioNombre: "Sala de Conferencias",
-    usuario: "Diego Herrera",
-    email: "diego@email.com",
-    fecha: "2025-04-14",
-    horaInicio: "10:00",
-    horaFin: "12:00",
-    estado: "pendiente"
-  },
-  {
-    id: "5",
-    espacioId: 7,
-    espacioNombre: "Oficina Estándar B",
-    usuario: "Valentina Torres",
-    email: "vale@email.com",
-    fecha: "2025-04-15",
-    horaInicio: "09:00",
-    horaFin: "18:00",
-    estado: "confirmada"
-  },
-  {
-    id: "6",
-    espacioId: 2,
-    espacioNombre: "Escritorio Privado 1",
-    usuario: "Matías Soto",
-    email: "matias@email.com",
-    fecha: "2025-04-16",
-    horaInicio: "13:00",
-    horaFin: "17:00",
-    estado: "cancelada"
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+      versionKey: false,
+      transform: (_, ret) => {
+        ret.id = ret._id.toString();
+        delete ret._id;
+        return ret;
+      },
+    },
   }
-];
+);
 
-export function getAll() {
-  return reservas;
-}
+// Validación a nivel de documento: la hora de fin debe ser posterior a la de inicio.
+reservaSchema.pre('validate', function () {
+  if (this.horaInicio && this.horaFin && this.horaFin <= this.horaInicio) {
+    this.invalidate('horaFin', 'La hora de fin debe ser posterior a la hora de inicio');
+  }
+});
 
-export function getById(id) {
-  return reservas.find((r) => r.id === String(id)) || null;
-}
+const Reserva = mongoose.model('Reserva', reservaSchema);
 
-export function create(data) {
-  const nuevaReserva = {
-    id: uuidv4(),
-    espacioId: data.espacioId,
-    espacioNombre: data.espacioNombre,
-    usuario: data.usuario,
-    email: data.email,
-    fecha: data.fecha,
-    horaInicio: data.horaInicio,
-    horaFin: data.horaFin,
-    estado: 'pendiente'
-  };
-  reservas.push(nuevaReserva);
-  return nuevaReserva;
-}
-
-export function update(id, data) {
-  const index = reservas.findIndex((r) => r.id === String(id));
-  if (index === -1) return null;
-
-  reservas[index] = { ...reservas[index], ...data, id: String(id) };
-  return reservas[index];
-}
-
-export function remove(id) {
-  const index = reservas.findIndex((r) => r.id === String(id));
-  if (index === -1) return false;
-
-  reservas.splice(index, 1);
-  return true;
-}
+export default Reserva;

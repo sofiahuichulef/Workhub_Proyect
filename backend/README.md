@@ -1,194 +1,348 @@
-# Backend - README
+# Workhub — Backend
 
-## 📌 Descripción del proyecto
-Este backend corresponde a una aplicación que permite gestionar información mediante una API REST. Proporciona endpoints para interactuar con los recursos del sistema, permitiendo operaciones como creación, lectura, actualización y eliminación de datos.
-
-El objetivo principal del backend es servir como capa lógica que conecta el frontend con la base de datos, asegurando el manejo correcto de la información y la implementación de reglas de negocio.
+API REST para la gestión de un espacio de coworking: catálogo de **espacios** reservables, **usuarios** y **reservas** que relacionan ambos.
 
 ---
 
-## 🛠️ Tecnologías utilizadas
-- Node.js
-- Express.js
-- JavaScript (ES6+)
-- npm (gestor de paquetes)
+## 📌 Descripción
+
+Este backend expone una API REST construida con **Node.js + Express** y persiste los datos en **MongoDB** a través de **Mongoose**.
+Cubre el Sprint 3 del proyecto Workhub: definición del modelo de datos, conexión a base de datos, rutas, controladores, validaciones y operaciones CRUD.
 
 ---
 
-## ⚙️ Instalación
-Para instalar las dependencias del proyecto, ejecutar el siguiente comando dentro de la carpeta `backend/`:
+## 🛠️ Tecnologías
+
+- **Node.js** (ES Modules)
+- **Express 5**
+- **MongoDB** (local o Atlas)
+- **Mongoose** — ODM, esquemas, validaciones y `populate()`
+- **express-validator** — validación de entrada en las rutas
+- **dotenv** — variables de entorno
+- **cors** — habilitar peticiones desde el frontend
+
+---
+
+## 📂 Estructura del proyecto
+
+```
+backend/
+├── .env                  # Variables de entorno (NO subir a Git)
+├── .env.example          # Plantilla de variables de entorno
+├── .gitignore
+├── package.json
+└── src/
+    ├── index.js                          # Punto de entrada del servidor
+    ├── seed.js                           # Script para poblar la BD
+    ├── config/
+    │   └── db.js                         # Conexión a MongoDB
+    ├── models/
+    │   ├── usuarioModel.js               # Schema Usuario
+    │   ├── espacioModel.js               # Schema Espacio
+    │   └── reservaModel.js               # Schema Reserva (con referencias)
+    ├── controllers/
+    │   ├── usuariosController.js
+    │   ├── espaciosController.js
+    │   └── reservasController.js         # Usa populate()
+    ├── routes/
+    │   ├── usuarios.routes.js
+    │   ├── espacios.routes.js
+    │   └── reservas.routes.js
+    └── middlewares/
+        ├── validateReserva.js            # Validaciones express-validator
+        ├── errorHandler.js
+        └── notFound.js
+```
+
+---
+
+## ⚙️ Instalación y ejecución
+
+### 1. Instalar dependencias
+
+Desde la carpeta `backend/`:
 
 ```bash
 npm install
 ```
 
----
+### 2. Configurar variables de entorno
 
-## ▶️ Ejecución del proyecto
-Para iniciar el servidor en modo desarrollo:
+Copiar el archivo de ejemplo y editarlo:
 
 ```bash
-npm start
+cp .env.example .env
 ```
 
-El servidor se ejecutará normalmente en:
+Editar `.env`:
 
+```env
+PORT=3000
+
+# MongoDB local:
+MONGO_URI=mongodb://localhost:27017/workhub
+
+# O bien MongoDB Atlas:
+# MONGO_URI=mongodb+srv://<usuario>:<password>@<cluster>.mongodb.net/workhub?retryWrites=true&w=majority
 ```
-http://localhost:3000
+
+### 3. Poblar la base de datos (opcional, recomendado la primera vez)
+
+```bash
+npm run seed
 ```
+
+Este script:
+- Limpia las colecciones existentes.
+- Inserta los **8 espacios** del catálogo original.
+- Crea **1 usuario** de ejemplo.
+- Crea **1 reserva** que referencia al usuario y a un espacio.
+
+### 4. Levantar el servidor
+
+```bash
+npm start        # producción
+npm run dev      # desarrollo (con --watch, recarga al modificar archivos)
+```
+
+El servidor queda en `http://localhost:3000`.
 
 ---
 
-## 📡 Endpoints de la API
+## 🗄️ Modelo de datos
 
-| Método | Ruta | Descripción | Body requerido | Respuesta exitosa | Errores posibles |
-|--------|------|------------|----------------|-------------------|------------------|
-| GET | /api/resource | Obtiene todos los recursos | No | 200 OK - Lista de recursos | 500 Internal Server Error |
-| GET | /api/resource/:id | Obtiene un recurso por ID | No | 200 OK - Recurso encontrado | 404 Not Found |
-| POST | /api/resource | Crea un nuevo recurso | JSON con datos del recurso | 201 Created | 400 Bad Request |
-| PUT | /api/resource/:id | Actualiza un recurso existente | JSON con datos actualizados | 200 OK | 400 Bad Request, 404 Not Found |
-| DELETE | /api/resource/:id | Elimina un recurso | No | 200 OK | 404 Not Found |
+### Usuario
+
+| Campo      | Tipo    | Restricciones                                              |
+|------------|---------|------------------------------------------------------------|
+| `nombre`   | String  | Requerido, 2–80 caracteres                                  |
+| `email`    | String  | Requerido, único, formato email, en minúsculas              |
+| `telefono` | String  | Opcional, máx. 20 caracteres                                |
+| `rol`      | String  | Enum: `cliente` (default) \| `admin`                        |
+| timestamps | —       | `createdAt`, `updatedAt` automáticos                        |
+
+### Espacio
+
+| Campo         | Tipo    | Restricciones                                                                 |
+|---------------|---------|--------------------------------------------------------------------------------|
+| `nombre`      | String  | Requerido, 3–100 caracteres                                                    |
+| `tipo`        | String  | Enum: `sala_reunion` \| `escritorio` \| `oficina` \| `open_space`              |
+| `capacidad`   | Number  | Requerido, entre 1 y 100                                                       |
+| `precio`      | Number  | Requerido, ≥ 0                                                                 |
+| `descripcion` | String  | Opcional, máx. 500 caracteres                                                  |
+| `disponible`  | Boolean | Default `true`                                                                 |
+| `imagen`      | String  | URL (opcional)                                                                 |
+| timestamps    | —       | `createdAt`, `updatedAt`                                                       |
+
+### Reserva (con relaciones)
+
+| Campo        | Tipo                  | Restricciones                                                       |
+|--------------|-----------------------|----------------------------------------------------------------------|
+| `usuario`    | ObjectId → `Usuario`  | Requerido. **Relación con Usuario**                                  |
+| `espacio`    | ObjectId → `Espacio`  | Requerido. **Relación con Espacio**                                  |
+| `fecha`      | Date                  | Requerido, fecha válida                                              |
+| `horaInicio` | String                | Requerido, formato `HH:MM` (24h)                                     |
+| `horaFin`    | String                | Requerido, formato `HH:MM` (24h), **debe ser posterior a horaInicio** |
+| `estado`     | String                | Enum: `pendiente` (default) \| `confirmada` \| `cancelada` \| `completada` |
+| `notas`      | String                | Opcional, máx. 300 caracteres                                        |
+| timestamps   | —                     | `createdAt`, `updatedAt`                                             |
+
+**Relación:** la `Reserva` referencia tanto a `Usuario` como a `Espacio` mediante `ObjectId`.
+Las consultas usan `.populate('usuario').populate('espacio')` para devolver los datos completos de ambas entidades en una sola respuesta.
 
 ---
 
-## 📥 Ejemplos de Request y Response
+## 📡 Endpoints
 
-### 🔹 GET /api/resource
-**Request:**
+### Espacios — `/espacios`
+
+| Método | Ruta              | Descripción                          |
+|--------|-------------------|--------------------------------------|
+| GET    | `/espacios`       | Lista todos los espacios             |
+| GET    | `/espacios/:id`   | Obtiene un espacio por ID            |
+| POST   | `/espacios`       | Crea un nuevo espacio                |
+| PUT    | `/espacios/:id`   | Actualiza un espacio                 |
+| DELETE | `/espacios/:id`   | Elimina un espacio                   |
+
+### Usuarios — `/usuarios`
+
+| Método | Ruta              | Descripción                          |
+|--------|-------------------|--------------------------------------|
+| GET    | `/usuarios`       | Lista todos los usuarios             |
+| GET    | `/usuarios/:id`   | Obtiene un usuario por ID            |
+| POST   | `/usuarios`       | Crea un nuevo usuario                |
+| PUT    | `/usuarios/:id`   | Actualiza un usuario                 |
+| DELETE | `/usuarios/:id`   | Elimina un usuario                   |
+
+### Reservas — `/reservas`
+
+| Método | Ruta              | Descripción                                                              |
+|--------|-------------------|---------------------------------------------------------------------------|
+| GET    | `/reservas`       | Lista todas las reservas **con usuario y espacio populados**              |
+| GET    | `/reservas/:id`   | Obtiene una reserva por ID **populada**                                   |
+| POST   | `/reservas`       | Crea una reserva (acepta `usuario` por ID o bien `email` + `nombre`)      |
+| PUT    | `/reservas/:id`   | Actualiza una reserva                                                     |
+| DELETE | `/reservas/:id`   | Elimina una reserva                                                       |
+
+### Otros
+
+| Método | Ruta     | Descripción              |
+|--------|----------|--------------------------|
+| GET    | `/ping`  | Healthcheck (pong)       |
+
+---
+
+## 📥 Ejemplos de uso
+
+### Crear un espacio
+
 ```http
-GET /api/resource
+POST /espacios
+Content-Type: application/json
 ```
 
-**Response (200 OK):**
+```json
+{
+  "nombre": "Sala Brainstorming",
+  "tipo": "sala_reunion",
+  "capacidad": 6,
+  "precio": 10000,
+  "descripcion": "Sala con pizarra y post-its",
+  "disponible": true
+}
+```
+
+### Crear una reserva (usuario nuevo al vuelo)
+
+El backend crea el usuario automáticamente si no existe ese email.
+
+```http
+POST /reservas
+Content-Type: application/json
+```
+
+```json
+{
+  "espacio": "65f0a8c1b2e4d3a1c9f8b7e6",
+  "nombre": "Miguel Falcón",
+  "email": "miguel@email.com",
+  "fecha": "2026-06-15",
+  "horaInicio": "09:00",
+  "horaFin": "12:00",
+  "notas": "Reunión con cliente"
+}
+```
+
+### Crear una reserva (usuario ya registrado)
+
+```json
+{
+  "usuario": "65f0a8c1b2e4d3a1c9f8b7e6",
+  "espacio": "65f0a8c1b2e4d3a1c9f8b7e7",
+  "fecha": "2026-06-15",
+  "horaInicio": "14:00",
+  "horaFin": "16:00"
+}
+```
+
+### Listar reservas (respuesta con populate)
+
+```http
+GET /reservas
+```
+
 ```json
 [
   {
-    "id": 1,
-    "name": "Recurso 1",
-    "description": "Descripción del recurso"
+    "id": "65f0a8c1b2e4d3a1c9f8b7e8",
+    "usuario": {
+      "id": "65f0a8c1b2e4d3a1c9f8b7e6",
+      "nombre": "Miguel Falcón",
+      "email": "miguel@email.com",
+      "rol": "cliente"
+    },
+    "espacio": {
+      "id": "65f0a8c1b2e4d3a1c9f8b7e7",
+      "nombre": "Room A - Reunion room",
+      "tipo": "sala_reunion",
+      "capacidad": 8,
+      "precio": 15000,
+      "imagen": "https://...",
+      "disponible": true
+    },
+    "fecha": "2026-06-15T00:00:00.000Z",
+    "horaInicio": "09:00",
+    "horaFin": "12:00",
+    "estado": "pendiente",
+    "notas": "Reunión con cliente",
+    "createdAt": "2026-05-13T18:22:10.123Z",
+    "updatedAt": "2026-05-13T18:22:10.123Z"
   }
 ]
 ```
 
----
+### Errores típicos
 
-### 🔹 GET /api/resource/:id
-**Request:**
-```http
-GET /api/resource/1
-```
-
-**Response (200 OK):**
-```json
-{
-  "id": 1,
-  "name": "Recurso 1",
-  "description": "Descripción del recurso"
-}
-```
-
-**Error (404 Not Found):**
-```json
-{
-  "error": "Recurso no encontrado"
-}
-```
-
----
-
-### 🔹 POST /api/resource
-**Request:**
-```http
-POST /api/resource
-Content-Type: application/json
-```
+**400 — Validación fallida**
 
 ```json
 {
-  "name": "Nuevo recurso",
-  "description": "Descripción del nuevo recurso"
+  "message": "Datos inválidos",
+  "errores": [
+    "La hora de fin debe ser posterior a la hora de inicio",
+    "El email es obligatorio"
+  ]
 }
 ```
 
-**Response (201 Created):**
+**404 — No encontrado**
+
 ```json
-{
-  "id": 2,
-  "name": "Nuevo recurso",
-  "description": "Descripción del nuevo recurso"
-}
+{ "message": "Reserva no encontrada" }
 ```
 
-**Error (400 Bad Request):**
+**409 — Email duplicado**
+
 ```json
-{
-  "error": "Datos inválidos"
-}
+{ "message": "Ya existe un usuario registrado con ese email" }
 ```
 
 ---
 
-### 🔹 PUT /api/resource/:id
-**Request:**
-```http
-PUT /api/resource/1
-Content-Type: application/json
-```
+## ✅ Cumplimiento del Sprint 3
 
-```json
-{
-  "name": "Recurso actualizado",
-  "description": "Nueva descripción"
-}
-```
-
-**Response (200 OK):**
-```json
-{
-  "id": 1,
-  "name": "Recurso actualizado",
-  "description": "Nueva descripción"
-}
-```
-
-**Errores:**
-```json
-{
-  "error": "Recurso no encontrado"
-}
-```
+| Requerimiento                                        | Dónde se cumple                                              |
+|------------------------------------------------------|---------------------------------------------------------------|
+| Conectar MongoDB con Mongoose                        | `src/config/db.js` + `src/index.js`                           |
+| Modelo Usuario                                       | `src/models/usuarioModel.js`                                  |
+| Modelo Espacio                                       | `src/models/espacioModel.js`                                  |
+| Modelo Reserva                                       | `src/models/reservaModel.js`                                  |
+| Reserva referencia a Usuario y Espacio               | Campos `usuario` y `espacio` como `ObjectId` con `ref`        |
+| `populate()`                                         | `getReservas`, `getReservaById`, `crearReserva`, `actualizarReserva` |
+| Validaciones de esquema                              | `required`, `min/max`, `enum`, `match`, `unique`, hook `pre('validate')` |
+| Variables de entorno                                 | `.env` + `.env.example` (PORT, MONGO_URI)                     |
+| CRUD completo                                        | Espacios, Usuarios y Reservas                                 |
+| Manejo de errores                                    | `errorHandler.js`, `notFound.js`, validaciones por controlador |
 
 ---
 
-### 🔹 DELETE /api/resource/:id
-**Request:**
-```http
-DELETE /api/resource/1
+## 🧪 Probar la API
+
+Recomendado con **Postman**, **Thunder Client** o `curl`.
+
+```bash
+# Healthcheck
+curl http://localhost:3000/ping
+
+# Listar espacios
+curl http://localhost:3000/espacios
+
+# Listar reservas con populate
+curl http://localhost:3000/reservas
 ```
-
-**Response (200 OK):**
-```json
-{
-  "message": "Recurso eliminado correctamente"
-}
-```
-
-**Error (404 Not Found):**
-```json
-{
-  "error": "Recurso no encontrado"
-}
-```
-
----
-
-## ❗ Notas adicionales
-- Asegúrate de tener instalado Node.js en tu sistema.
-- Puedes usar herramientas como Postman o Thunder Client para probar los endpoints.
-- Configura variables de entorno si el proyecto lo requiere (por ejemplo, puerto o conexión a base de datos).
 
 ---
 
 ## 👨‍💻 Autor
-Proyecto desarrollado como parte de un trabajo académico.
 
+Proyecto Workhub — Sprint 3 — Generation Chile / Tripleten.
